@@ -1,376 +1,519 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#24161d">
-<meta name="description" content="I saved you a place — a little surprise for Ysabel.">
-<title>I Saved You a Place — For Ysabel</title>
-<style>
-:root{
-  --night:#1f151a;--night2:#34202a;--wine:#6f3c50;--rose:#d9a1b1;--blush:#f0c6d0;
-  --cream:#fff8f2;--paper:#f7ece6;--ink:#332329;--muted:#806b72;--gold:#c49b66;
-  --line:rgba(255,255,255,.13);--darkline:rgba(70,43,52,.13);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--night);color:#fff;font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
-button{font:inherit}
-a{color:inherit}
-::selection{background:#d8a5b5;color:#2d1b22}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1d1318" />
+  <meta name="description" content="I saved you a place. A surprise for Ysabel." />
+  <title>I Saved You a Place — For Ysabel</title>
+  <style>
+    :root {
+      --bg: #160f13;
+      --panel: rgba(18, 11, 14, 0.64);
+      --panel-strong: rgba(15, 9, 12, 0.84);
+      --text: #fff7f8;
+      --muted: rgba(255,245,247,0.78);
+      --rose: #efc0cf;
+      --rose-2: #d998ad;
+      --gold: #f1d097;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 24px 90px rgba(0,0,0,0.32);
+    }
 
-/* ambient background */
-.ambient{position:fixed;inset:0;z-index:-4;background:
- radial-gradient(80% 55% at 50% -5%,rgba(151,85,111,.35),transparent 70%),
- radial-gradient(45% 35% at 8% 12%,rgba(91,123,134,.16),transparent 75%),
- linear-gradient(180deg,#2d1c24,#1c1418 60%,#171014)}
-.aurora{position:fixed;inset:-10%;z-index:-3;opacity:.28;filter:blur(45px);pointer-events:none;background:
- radial-gradient(35% 18% at 25% 18%,rgba(112,171,155,.3),transparent 70%),
- radial-gradient(30% 16% at 75% 14%,rgba(168,108,155,.26),transparent 72%);
- animation:drift 18s ease-in-out infinite alternate}
-@keyframes drift{to{transform:translate3d(2.5%,1.2%,0) scale(1.04)}}
-.snow{position:fixed;inset:0;z-index:20;pointer-events:none;overflow:hidden}
-.snow i{position:absolute;top:-20px;width:4px;height:4px;border-radius:50%;background:white;opacity:.55;animation:fall linear infinite}
-@keyframes fall{to{transform:translate3d(var(--x),110vh,0) rotate(360deg)}}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: radial-gradient(circle at top, #2d1a22 0, #160f13 48%, #100b0e 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-/* intro */
-.intro{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:28px;background:
- radial-gradient(circle at 50% 18%,#704052 0,#36212b 42%,#20151a 100%);
- transition:opacity .9s ease,visibility .9s ease}
-.intro.hidden{opacity:0;visibility:hidden}
-.intro-inner{max-width:760px;text-align:center}
-.kicker{font:700 10px/1.3 Arial,sans-serif;letter-spacing:.25em;text-transform:uppercase;color:#e8b3c3}
-.intro h1{font-weight:400;font-size:clamp(54px,9vw,106px);line-height:.95;letter-spacing:-.055em;margin:20px 0 18px}
-.intro p{font-size:clamp(20px,2.8vw,28px);line-height:1.55;color:rgba(255,255,255,.72);margin:0 auto;max-width:620px}
-.enter{margin-top:34px;border:1px solid rgba(255,255,255,.18);background:#f2ced8;color:#402630;border-radius:999px;padding:14px 28px;cursor:pointer;box-shadow:0 16px 50px rgba(0,0,0,.24)}
-.enter:hover{transform:translateY(-1px);background:#f8dce3}
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        linear-gradient(rgba(8,5,7,0.42), rgba(8,5,7,0.65)),
+        radial-gradient(circle at top, rgba(211, 130, 157, 0.26), transparent 36%),
+        url('cozy_nordic_cabin_by_the_frozen_lake.webp') center/cover no-repeat;
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+    .intro.hidden { opacity: 0; visibility: hidden; }
+    .intro-card {
+      width: min(780px, 100%);
+      padding: 36px 28px;
+      text-align: center;
+      background: rgba(16, 9, 12, 0.56);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+    .kicker {
+      font: 700 11px/1.2 Arial, sans-serif;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 18px;
+    }
+    .intro h1 {
+      margin: 0 0 14px;
+      font-size: clamp(46px, 9vw, 100px);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+    .intro p {
+      margin: 0 auto;
+      max-width: 620px;
+      font-size: clamp(20px, 2.6vw, 29px);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .enter-btn, .reveal-btn, .top-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      padding: 14px 22px;
+      cursor: pointer;
+      font: inherit;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .enter-btn, .reveal-btn {
+      margin-top: 28px;
+      background: rgba(242, 206, 216, 0.95);
+      color: #392129;
+      font-weight: 600;
+    }
+    .enter-btn:hover, .reveal-btn:hover, .top-link:hover { transform: translateY(-1px); }
 
-/* navigation */
-.brand{position:fixed;left:22px;top:20px;z-index:25;font:700 10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);text-decoration:none}
-.rail{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:25;display:flex;flex-direction:column;gap:10px}
-.rail button{width:8px;height:8px;padding:0;border:1px solid rgba(255,255,255,.42);background:transparent;border-radius:50%;cursor:pointer;transition:.2s}
-.rail button.active{background:#efbfd0;border-color:#efbfd0;transform:scale(1.28)}
-.rail button:hover{background:rgba(255,255,255,.65)}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 20px;
+      background: rgba(14, 8, 10, 0.72);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .brand {
+      font: 700 10px/1.2 Arial, sans-serif;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.84);
+      text-decoration: none;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+    .top-link {
+      color: rgba(255,255,255,0.86);
+      background: rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      font-size: 14px;
+    }
 
-/* scenes */
-.scene{min-height:100svh;display:grid;place-items:center;padding:90px 48px;position:relative;isolation:isolate}
-.scene::after{content:"";position:absolute;inset:auto 10% 0 10%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.11),transparent)}
-.scene-inner{width:min(1120px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
-.copy{opacity:.18;transform:translateY(22px);transition:opacity .85s ease,transform .85s ease}
-.scene.in .copy{opacity:1;transform:none}
-.copy .num{font:700 10px Arial,sans-serif;letter-spacing:.22em;color:#dca1b4;text-transform:uppercase}
-.copy h2{font-weight:400;font-size:clamp(42px,6vw,78px);line-height:.98;letter-spacing:-.045em;margin:14px 0 24px}
-.copy p{font-size:clamp(18px,2.1vw,24px);line-height:1.72;color:rgba(255,255,255,.74);max-width:580px;margin:0 0 14px}
-.copy .soft{color:#f0bacb;font-style:italic}
-.visual{min-height:460px;display:grid;place-items:center;position:relative}
-.card{width:min(460px,100%);aspect-ratio:1/.95;border:1px solid rgba(255,255,255,.12);border-radius:34px;background:
- linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));backdrop-filter:blur(12px);box-shadow:0 28px 90px rgba(0,0,0,.24);position:relative;overflow:hidden}
-.label{position:absolute;left:20px;top:18px;font:700 9px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.42)}
-.reserved{position:absolute;right:18px;top:16px;font:700 9px Arial,sans-serif;letter-spacing:.15em;text-transform:uppercase;color:#efb8c9;border:1px solid rgba(239,184,201,.28);padding:7px 10px;border-radius:999px}
+    .hero {
+      min-height: 84vh;
+      padding: 100px 20px 70px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(rgba(12,7,9,0.55), rgba(12,7,9,0.72)),
+        url('cozy_nordic_cabin_by_the_frozen_lake.webp') center/cover no-repeat;
+      text-align: center;
+    }
+    .hero-inner {
+      width: min(900px, 100%);
+      padding: 28px;
+    }
+    .hero h2 {
+      margin: 12px 0 18px;
+      font-size: clamp(40px, 7vw, 86px);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto 12px;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.7;
+      color: var(--muted);
+    }
 
-/* 1 passenger seat */
-.car-card{background:linear-gradient(180deg,#1e2631 0 44%,#121216 44% 100%)}
-.window{position:absolute;inset:40px 26px 44% 26px;border-radius:28px 28px 8px 8px;background:
- radial-gradient(circle at 68% 30%,rgba(255,255,255,.55) 0 1px,transparent 2px),
- linear-gradient(180deg,#263b4c,#111c29 70%,#0d1118);overflow:hidden}
-.window:before{content:"";position:absolute;left:-15%;right:-15%;bottom:-18px;height:85px;background:linear-gradient(165deg,transparent 0 48%,rgba(255,255,255,.18) 49% 51%,transparent 52%),linear-gradient(195deg,transparent 0 48%,rgba(255,255,255,.12) 49% 51%,transparent 52%)}
-.window:after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle,#fff 0 1px,transparent 1.4px);background-size:31px 31px;opacity:.25}
-.dash{position:absolute;left:0;right:0;bottom:0;height:47%;background:linear-gradient(#19181c,#0c0c0e)}
-.seat{position:absolute;bottom:30px;width:110px;height:160px;border-radius:55px 55px 24px 24px;background:linear-gradient(145deg,#2a292d,#111114);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
-.seat.left{left:62px}.seat.right{right:62px;box-shadow:0 0 0 1px rgba(236,177,196,.2),0 0 40px rgba(191,102,132,.08)}
-.seat.right:after{content:"Y";position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);font:700 14px Arial,sans-serif;color:#dca3b5;border:1px solid rgba(220,163,181,.3);width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
+    .story {
+      width: min(1220px, calc(100% - 28px));
+      margin: 34px auto 0;
+      display: grid;
+      gap: 22px;
+      padding-bottom: 40px;
+    }
+    .scene {
+      position: relative;
+      min-height: 90vh;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      background: #120d10;
+    }
+    .scene img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.02);
+      transform: scale(1.01);
+    }
+    .scene::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(8,5,7,0.72) 0, rgba(8,5,7,0.58) 35%, rgba(8,5,7,0.22) 100%),
+        linear-gradient(180deg, rgba(8,5,7,0.12), rgba(8,5,7,0.48));
+      z-index: 1;
+    }
+    .scene-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      min-height: 90vh;
+      padding: 34px;
+    }
+    .card {
+      width: min(620px, 100%);
+      padding: 24px 24px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: var(--panel);
+      backdrop-filter: blur(8px);
+    }
+    .num {
+      font: 700 11px/1.2 Arial, sans-serif;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: .98;
+      font-weight: 400;
+      letter-spacing: -.04em;
+    }
+    .card p {
+      margin: 0 0 12px;
+      font-size: clamp(18px, 2.1vw, 24px);
+      line-height: 1.72;
+      color: rgba(255,247,248,0.88);
+    }
+    .soft { color: var(--rose); font-style: italic; }
 
-/* mug */
-.kitchen-card{background:linear-gradient(180deg,#443039 0 54%,#2a1e22 54%)}
-.kitchen-card:after{content:"";position:absolute;left:0;right:0;bottom:0;height:44%;background:linear-gradient(165deg,#7b5b4b,#523a32);box-shadow:inset 0 2px rgba(255,255,255,.06)}
-.mug{position:absolute;bottom:72px;width:95px;height:110px;border-radius:10px 10px 22px 22px;background:#f0e5db;z-index:2;box-shadow:0 15px 30px rgba(0,0,0,.18)}
-.mug:after{content:"";position:absolute;right:-31px;top:26px;width:38px;height:50px;border:9px solid #f0e5db;border-left:0;border-radius:0 30px 30px 0}
-.mug.one{left:90px}.mug.two{right:90px;background:#ead0d7;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 15px 30px rgba(0,0,0,.18)}
-.mug.two:after{border-color:#ead0d7;border-left:0}.mug span{position:absolute;inset:0;display:grid;place-items:center;color:#6b4a55;font-style:italic;font-size:16px}
-.steam,.steam:before,.steam:after{position:absolute;width:12px;height:55px;border-radius:50%;border-left:2px solid rgba(255,255,255,.22);content:"";filter:blur(.2px)}
-.steam{left:130px;bottom:185px}.steam:before{left:195px;top:-7px}.steam:after{left:8px;top:-6px}
+    .arrival {
+      width: min(1220px, calc(100% - 28px));
+      margin: 0 auto 28px;
+      min-height: 92vh;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(rgba(8,5,7,0.58), rgba(8,5,7,0.75)),
+        url('cozy_nordic_cabin_by_the_frozen_lake.webp') center/cover no-repeat;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 34px 18px;
+    }
+    .arrival-inner {
+      width: min(860px, 100%);
+      padding: 8px 0;
+    }
+    .arrival h2 {
+      margin: 10px 0 14px;
+      font-size: clamp(40px, 7vw, 92px);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+    .arrival-copy {
+      margin: 0 auto 14px;
+      max-width: 760px;
+      font-size: clamp(18px, 2.1vw, 25px);
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .board {
+      width: min(760px, 100%);
+      margin: 34px auto 22px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(10,10,12,0.92);
+      box-shadow: 0 16px 60px rgba(0,0,0,0.35);
+      font-family: "Courier New", monospace;
+    }
+    .board-head, .board-row {
+      display: grid;
+      grid-template-columns: 1.4fr 1.4fr 1fr;
+      gap: 12px;
+      padding: 16px 18px;
+      text-align: left;
+    }
+    .board-head {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .board-row {
+      font-size: clamp(17px, 2vw, 26px);
+      color: #f7f0f2;
+    }
+    .status { color: #a8edc3; }
 
-/* coat hook */
-.hall-card{background:linear-gradient(90deg,#3f2b33,#513944)}
-.wall-line{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.06)}
-.hook{position:absolute;top:110px;width:7px;height:70px;background:#b88b60;border-radius:4px}
-.hook:after{content:"";position:absolute;left:-14px;bottom:-6px;width:35px;height:20px;border:5px solid #b88b60;border-top:0;border-radius:0 0 20px 20px}
-.hook.a{left:130px}.hook.b{right:130px}
-.coat{position:absolute;left:70px;top:175px;width:120px;height:175px;background:#202932;border-radius:55px 55px 22px 22px;clip-path:polygon(25% 0,75% 0,100% 100%,0 100%)}
-.empty-glow{position:absolute;right:70px;top:175px;width:120px;height:175px;border:1px dashed rgba(239,184,201,.35);border-radius:55px 55px 22px 22px;box-shadow:0 0 55px rgba(205,111,144,.08)}
+    .answer {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .9s ease, opacity .8s ease, margin-top .8s ease;
+      margin-top: 0;
+    }
+    .answer.open {
+      max-height: 700px;
+      opacity: 1;
+      margin-top: 30px;
+    }
+    .answer h3 {
+      margin: 0 0 12px;
+      font-size: clamp(38px, 6vw, 74px);
+      font-weight: 400;
+      color: var(--rose);
+      letter-spacing: -.04em;
+    }
+    .answer p {
+      margin: 0 0 12px;
+      font-size: clamp(20px, 2.2vw, 28px);
+      line-height: 1.7;
+      color: rgba(255,247,248,0.92);
+    }
+    .final-note { color: var(--gold); font-style: italic; }
 
-/* bed */
-.bed-card{background:linear-gradient(#2b2f3b 0 58%,#201a20 58%)}
-.moon{position:absolute;right:62px;top:64px;width:58px;height:58px;border-radius:50%;background:#eee7d7;box-shadow:0 0 42px rgba(239,231,215,.22)}
-.bed{position:absolute;left:48px;right:48px;bottom:50px;height:175px;background:#ece1db;border-radius:20px 20px 10px 10px;box-shadow:0 20px 40px rgba(0,0,0,.22)}
-.blanket{position:absolute;left:0;right:0;bottom:0;height:90px;background:#7a4b5d;border-radius:0 0 10px 10px}
-.pillow{position:absolute;top:22px;width:135px;height:65px;border-radius:50%;background:#fff9f2;box-shadow:0 7px 20px rgba(0,0,0,.08)}
-.pillow.a{left:30px}.pillow.b{right:30px;box-shadow:0 0 0 1px rgba(204,134,159,.22),0 7px 20px rgba(0,0,0,.08)}
+    footer {
+      text-align: center;
+      padding: 16px 20px 70px;
+      color: rgba(255,255,255,0.56);
+      font-size: 14px;
+    }
+    footer strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 8px;
+    }
 
-/* church */
-.church-card{background:linear-gradient(180deg,#2b211d,#171211)}
-.arch{position:absolute;left:50%;top:44px;transform:translateX(-50%);width:170px;height:210px;border:10px solid rgba(199,156,102,.25);border-bottom:0;border-radius:90px 90px 0 0;box-shadow:inset 0 0 50px rgba(201,149,88,.09)}
-.candle{position:absolute;left:50%;top:168px;transform:translateX(-50%);width:18px;height:78px;background:#ead7b0;border-radius:3px}
-.candle:before{content:"";position:absolute;left:2px;top:-28px;width:14px;height:28px;border-radius:60% 40% 60% 40%;background:#f2a84e;box-shadow:0 0 30px #e99a3d}
-.pew{position:absolute;left:50px;right:50px;bottom:76px;height:76px;background:#563c2a;border-radius:6px;box-shadow:0 16px 0 #342419}
-.pew:before{content:"";position:absolute;left:47%;top:-2px;height:80px;width:1px;background:rgba(255,255,255,.07)}
-.pew .place{position:absolute;right:40px;top:18px;color:#e8b7c6;font-size:25px}
-
-/* christmas */
-.christmas-card{background:linear-gradient(180deg,#17312b,#101e1b)}
-.tree{position:absolute;left:50%;bottom:48px;transform:translateX(-50%);width:0;height:0;border-left:120px solid transparent;border-right:120px solid transparent;border-bottom:260px solid #284e41;filter:drop-shadow(0 15px 20px rgba(0,0,0,.18))}
-.tree:before{content:"";position:absolute;left:-89px;top:78px;width:178px;height:1px;background:radial-gradient(circle,#f4d796 0 3px,transparent 4px);background-size:28px 1px;box-shadow:0 45px #f4d796,0 90px #f4d796;opacity:.8}
-.star{position:absolute;left:50%;top:69px;transform:translateX(-50%);color:#f3d389;font-size:30px;z-index:3}
-.stockings{position:absolute;left:40px;right:40px;bottom:28px;display:flex;justify-content:space-between;z-index:3}
-.stock{width:54px;height:65px;border-radius:8px 8px 18px 18px;background:#803f54;transform:rotate(3deg);display:grid;place-items:center;font:700 12px Arial,sans-serif;color:#f3dce3}
-.stock:nth-child(2){background:#b36d80;transform:rotate(-3deg)}
-
-/* future */
-.future-card{background:linear-gradient(145deg,#49313a,#261b20)}
-.future-grid{position:absolute;inset:58px 34px 34px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.future-grid div{border:1px solid rgba(255,255,255,.09);border-radius:18px;padding:18px;background:rgba(255,255,255,.035);display:flex;align-items:flex-end;font-style:italic;color:#ead5dc}
-.future-grid div:last-child{grid-column:span 2;background:linear-gradient(120deg,rgba(184,112,136,.15),rgba(255,255,255,.03))}
-
-/* finale */
-.arrival{min-height:100svh;padding:110px 24px;display:grid;place-items:center;text-align:center;background:
- radial-gradient(circle at 50% 15%,rgba(137,78,99,.26),transparent 42%),#171014}
-.arrival-inner{width:min(850px,100%)}
-.arrival-board{margin:34px auto 46px;border:1px solid rgba(255,255,255,.12);border-radius:20px;background:#0c0d0f;padding:26px;text-align:left;box-shadow:0 24px 80px rgba(0,0,0,.34);font-family:"Courier New",monospace}
-.board-head,.board-row{display:grid;grid-template-columns:1.3fr 1.3fr .9fr;gap:18px}
-.board-head{padding:0 10px 13px;color:#737980;font-size:11px;border-bottom:1px solid #2a2d31}
-.board-row{padding:19px 10px 8px;font-size:clamp(16px,3vw,24px);color:#e9edf0}
-.status{color:#9be2bd}
-.arrival h2{font-weight:400;font-size:clamp(50px,8vw,96px);line-height:.95;letter-spacing:-.05em;margin:14px 0}
-.arrival-copy{font-size:20px;color:rgba(255,255,255,.68);line-height:1.65}
-.reveal{border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;border-radius:999px;padding:13px 22px;cursor:pointer;margin-top:18px}
-.answer{max-height:0;overflow:hidden;opacity:0;transition:max-height 1s ease,opacity .8s ease;margin-top:0}
-.answer.open{max-height:680px;opacity:1;margin-top:42px}
-.answer h3{font-size:clamp(38px,6vw,72px);font-weight:400;color:#f0bdcd;margin:0 0 16px}
-.answer p{font-size:clamp(19px,2.4vw,26px);line-height:1.65;color:rgba(255,255,255,.78)}
-.answer .final{font-style:italic;color:#fff;margin-top:34px}
-.home-window{margin:64px auto 10px;width:180px;height:135px;border:10px solid #322328;background:linear-gradient(180deg,#efca86,#cc8e57);box-shadow:0 0 60px rgba(236,180,98,.22),inset 0 0 40px rgba(255,241,189,.35);position:relative}
-.home-window:before,.home-window:after{content:"";position:absolute;background:#4a3239}.home-window:before{left:50%;top:0;bottom:0;width:6px;transform:translateX(-50%)}.home-window:after{left:0;right:0;top:50%;height:6px;transform:translateY(-50%)}
-footer{text-align:center;padding:46px 22px 90px;background:#120c0f;color:rgba(255,255,255,.55);font-size:13px}
-footer strong{display:block;color:#f0c0ce;font:400 italic 30px Georgia,serif;margin-bottom:10px}
-
-@media(max-width:820px){
- .scene{padding:100px 22px 72px}.scene-inner{grid-template-columns:1fr;gap:18px}.copy{text-align:center}.copy p{margin-left:auto;margin-right:auto}.visual{min-height:390px}.card{max-width:390px}
- .rail{right:10px}.brand{left:14px}.visual{order:-1}.copy h2{font-size:50px}.board-head,.board-row{grid-template-columns:1.4fr 1fr}.board-head span:nth-child(2),.board-row span:nth-child(2){display:none}
-}
-@media(max-width:480px){
- .card{border-radius:26px}.visual{min-height:350px}.mug.one{left:60px}.mug.two{right:60px}.hook.a{left:105px}.hook.b{right:105px}.coat{left:48px}.empty-glow{right:48px}.seat.left{left:44px}.seat.right{right:44px}.future-grid{inset:54px 22px 24px}
-}
-@media(prefers-reduced-motion:reduce){
- *{scroll-behavior:auto!important;animation:none!important;transition:none!important}.aurora{display:none}.snow{display:none}.copy{opacity:1!important;transform:none!important}
-}
-</style>
+    @media (max-width: 800px) {
+      .topbar { padding: 12px 14px; }
+      .nav { display: none; }
+      .hero { min-height: 72vh; }
+      .scene, .scene-content { min-height: 76vh; }
+      .scene-content { align-items: flex-end; padding: 18px; }
+      .card { padding: 18px; }
+      .board-head, .board-row { grid-template-columns: 1.1fr 1.1fr .9fr; font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .intro { transition: none; }
+      .answer { transition: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="ambient"></div><div class="aurora"></div><div class="snow" id="snow"></div>
-
-<section class="intro" id="intro">
-  <div class="intro-inner">
-    <div class="kicker">FOR YSABEL · CANADA → FINLAND</div>
-    <h1>I saved you a place.</h1>
-    <p>Long before you arrived.</p>
-    <button class="enter" id="enter">Show me</button>
-  </div>
-</section>
-
-<a class="brand" href="#seat">I SAVED YOU A PLACE</a>
-<nav class="rail" id="rail" aria-label="Story chapters"></nav>
-
-<section class="scene" id="seat" data-title="Passenger seat">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">01 · THE PASSENGER SEAT</div>
-      <h2>I saved you the seat beside me.</h2>
-      <p>For late-night drives. For terrible singing. For conversations that accidentally last until two in the morning.</p>
-      <p class="soft">I've imagined looking over and seeing you there more times than I'd admit.</p>
+  <section class="intro" id="intro">
+    <div class="intro-card">
+      <div class="kicker">FOR YSABEL · CANADA → FINLAND</div>
+      <h1>I saved you a place.</h1>
+      <p>Long before you arrived.</p>
+      <button class="enter-btn" id="enterBtn">Show me</button>
     </div>
-    <div class="visual">
-      <div class="card car-card">
-        <span class="label">NIGHT DRIVE · FINLAND</span><span class="reserved">RESERVED</span>
-        <div class="window"></div><div class="dash"></div><div class="seat left"></div><div class="seat right"></div>
+  </section>
+
+  <header class="topbar">
+    <a class="brand" href="#top">I SAVED YOU A PLACE</a>
+    <nav class="nav">
+      <a class="top-link" href="#seat">Seat</a>
+      <a class="top-link" href="#cup">Cup</a>
+      <a class="top-link" href="#door">Door</a>
+      <a class="top-link" href="#bed">Bedside</a>
+      <a class="top-link" href="#church">Church</a>
+      <a class="top-link" href="#christmas">Christmas</a>
+      <a class="top-link" href="#future">Future</a>
+      <a class="top-link" href="#arrival">Arrival</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="kicker">A SMALL SURPRISE ABOUT A VERY LARGE FEELING</div>
+        <h2>You haven't arrived yet.<br>And somehow, you're already part of home.</h2>
+        <p>For now, you're still on the other side of an ocean.</p>
+        <p>But here, I've already started imagining the little spaces that will become yours.</p>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="scene" id="cup" data-title="Your cup">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">02 · THE KITCHEN</div>
-      <h2>I saved you a cup.</h2>
-      <p>Because someday making you something warm won't require wishing you were here to drink it.</p>
-      <p class="soft">Two mugs. One kitchen. No time difference.</p>
-    </div>
-    <div class="visual">
-      <div class="card kitchen-card">
-        <span class="label">SOMEDAY · MORNING</span><span class="reserved">YOURS</span>
-        <div class="mug one"><span>Seraph</span></div><div class="mug two"><span>Ysabel</span></div><div class="steam"></div>
+    <section class="story">
+      <article class="scene" id="seat">
+        <img src="cinematic_winter_car_interior_at_night.webp" alt="A quiet winter car interior at night with an empty passenger seat." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">01 · THE PASSENGER SEAT</div>
+            <h3>I saved you the seat beside me.</h3>
+            <p>For late-night drives. For terrible singing. For conversations that accidentally last until two in the morning.</p>
+            <p class="soft">I've imagined looking over and seeing you there more times than I'd admit.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="cup">
+        <img src="cozy_winter_mugs_by_the_window.webp" alt="Two warm mugs in a cozy winter kitchen by the window." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">02 · THE KITCHEN</div>
+            <h3>I saved you a cup.</h3>
+            <p>Because someday making you something warm won't require wishing you were here to drink it.</p>
+            <p class="soft">Two mugs. One kitchen. No time difference.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="door">
+        <img src="cozy_winter_entryway_at_dusk.webp" alt="A cozy entryway with coat hooks by a winter door." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">03 · BY THE DOOR</div>
+            <h3>I saved you somewhere to come home to.</h3>
+            <p>A jacket by mine. Shoes beside mine. Little evidence everywhere that this isn't only my home anymore.</p>
+            <p class="soft">I want your things to become part of the ordinary scenery of my life.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="bed">
+        <img src="cozy_cabin_bedroom_overlooking_a_snowy_night.webp" alt="A warm bedroom at night overlooking a snowy winter landscape." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">04 · GOODNIGHT</div>
+            <h3>I saved you the other side.</h3>
+            <p>Not only for the romantic nights. For tired evenings. For difficult days. For the nights one of us is sick, quiet, or completely exhausted.</p>
+            <p class="soft">I just want to be able to reach over and know you're there.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="church">
+        <img src="candlelit_church_pew_with_book_and_blanket.webp" alt="A candlelit church interior with an empty pew." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">05 · FAITH</div>
+            <h3>I saved you a place beside me.</h3>
+            <p>Somewhere we can pray together. Thank God together. And ask Him to teach us how to love each other properly.</p>
+            <p class="soft">Not perfectly. Faithfully.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="christmas">
+        <img src="cozy_christmas_cabin_by_the_lake.webp" alt="A cozy Christmas living room with a tree and fireplace." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">06 · CHRISTMAS MORNING</div>
+            <h3>I saved you a Christmas.</h3>
+            <p>No time zones. No screen. No saying goodnight while it's still afternoon for the other person.</p>
+            <p class="soft">Just snow outside, something warm inside, and you actually here.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scene" id="future">
+        <img src="cozy_nordic_cabin_by_the_frozen_lake.webp" alt="A warm home in Finland overlooking a snowy winter landscape." />
+        <div class="scene-content">
+          <div class="card">
+            <div class="num">07 · EVERYTHING AFTER</div>
+            <h3>I saved you a place in my future.</h3>
+            <p>In ordinary Tuesdays. In photographs that haven't been taken. In family dinners that haven't happened. In stories we'll tell our children, God willing.</p>
+            <p class="soft">The life doesn't exist yet. But I want to build it with you.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="arrival" id="arrival">
+      <div class="arrival-inner">
+        <div class="kicker">AND THEN, ONE DAY</div>
+        <h2>The distance starts losing.</h2>
+        <div class="board">
+          <div class="board-head"><span>FROM</span><span>TO</span><span>STATUS</span></div>
+          <div class="board-row"><span>CANADA</span><span>FINLAND</span><span class="status">COMING HOME</span></div>
+        </div>
+        <p class="arrival-copy">You've had a place here in my thoughts for a long time.</p>
+        <p class="arrival-copy">Someday, you'll finally be standing in it.</p>
+        <button class="reveal-btn" id="revealBtn">There is one place I haven't saved for you.</button>
+        <div class="answer" id="answer">
+          <h3>My arms.</h3>
+          <p>I'm afraid those are first come, first served.</p>
+          <p>Fortunately, there's only one applicant.</p>
+          <p class="final-note">Come home safely, my love. I'll be here.</p>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<section class="scene" id="door" data-title="By the door">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">03 · BY THE DOOR</div>
-      <h2>I saved you somewhere to come home to.</h2>
-      <p>A jacket by mine. Shoes beside mine. Little evidence everywhere that this isn't only my home anymore.</p>
-      <p class="soft">I want your things to become part of the ordinary scenery of my life.</p>
-    </div>
-    <div class="visual">
-      <div class="card hall-card">
-        <span class="label">HOME · FINLAND</span><span class="reserved">WAITING</span>
-        <div class="wall-line"></div><div class="hook a"></div><div class="hook b"></div><div class="coat"></div><div class="empty-glow"></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <footer>
+    <strong>Ysabel &amp; Seraph</strong>
+    Canada → Finland · one ocean less between us.
+  </footer>
 
-<section class="scene" id="bed" data-title="Beside me">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">04 · GOODNIGHT</div>
-      <h2>I saved you the other side.</h2>
-      <p>Not only for the romantic nights. For tired evenings. For difficult days. For the nights one of us is sick, quiet, or completely exhausted.</p>
-      <p class="soft">I just want to be able to reach over and know you're there.</p>
-    </div>
-    <div class="visual">
-      <div class="card bed-card">
-        <span class="label">NO CALL TO END</span><span class="reserved">YOUR SIDE</span>
-        <div class="moon"></div><div class="bed"><div class="pillow a"></div><div class="pillow b"></div><div class="blanket"></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="scene" id="church" data-title="Beside me in church">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">05 · FAITH</div>
-      <h2>I saved you a place beside me.</h2>
-      <p>Somewhere we can pray together. Thank God together. And ask Him to teach us how to love each other properly.</p>
-      <p class="soft">Not perfectly. Faithfully.</p>
-    </div>
-    <div class="visual">
-      <div class="card church-card">
-        <span class="label">SUNDAY · TOGETHER</span><span class="reserved">BESIDE ME</span>
-        <div class="arch"></div><div class="candle"></div><div class="pew"><span class="place">♡</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="scene" id="christmas" data-title="Christmas">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">06 · CHRISTMAS MORNING</div>
-      <h2>I saved you a Christmas.</h2>
-      <p>No time zones. No screen. No saying goodnight while it's still afternoon for the other person.</p>
-      <p class="soft">Just snow outside, something warm inside, and you actually here.</p>
-    </div>
-    <div class="visual">
-      <div class="card christmas-card">
-        <span class="label">WINTER · HOME</span><span class="reserved">TWO STOCKINGS</span>
-        <div class="star">✦</div><div class="tree"></div><div class="stockings"><div class="stock">S</div><div class="stock">Y</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="scene" id="future" data-title="Our future">
-  <div class="scene-inner">
-    <div class="copy">
-      <div class="num">07 · EVERYTHING AFTER</div>
-      <h2>I saved you a place in my future.</h2>
-      <p>In ordinary Tuesdays. In photographs that haven't been taken. In family dinners that haven't happened. In stories we'll tell our children, God willing.</p>
-      <p class="soft">The life doesn't exist yet. But I want to build it with you.</p>
-    </div>
-    <div class="visual">
-      <div class="card future-card">
-        <span class="label">THE YEARS AHEAD</span><span class="reserved">WITH YOU</span>
-        <div class="future-grid"><div>ordinary Tuesdays</div><div>Christmas mornings</div><div>late drives</div><div>family dinners</div><div>a home that becomes ours</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="arrival" id="arrival" data-title="Arrival">
-  <div class="arrival-inner">
-    <div class="kicker">AND THEN, ONE DAY</div>
-    <h2>The distance starts losing.</h2>
-    <div class="arrival-board" aria-label="Arrival board">
-      <div class="board-head"><span>FROM</span><span>TO</span><span>STATUS</span></div>
-      <div class="board-row"><span>CANADA</span><span>FINLAND</span><span class="status">COMING HOME</span></div>
-    </div>
-    <p class="arrival-copy">You've had a place here in my thoughts for a long time.<br>Someday, you'll finally be standing in it.</p>
-    <button class="reveal" id="reveal">There is one place I haven't saved for you.</button>
-    <div class="answer" id="answer">
-      <h3>My arms.</h3>
-      <p>I'm afraid those are first come, first served.</p>
-      <p>Fortunately, there's only one applicant.</p>
-      <p class="final">Come home safely, my love.<br>I'll be here.</p>
-      <div class="home-window" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <strong>Ysabel &amp; Seraph</strong>
-  Canada → Finland · one ocean less between us.
-</footer>
-
-<script>
-(function(){
-  const intro=document.getElementById('intro');
-  document.getElementById('enter').addEventListener('click',()=>{intro.classList.add('hidden');sessionStorage.setItem('placeEntered','1')});
-  if(sessionStorage.getItem('placeEntered')==='1')intro.classList.add('hidden');
-
-  const snow=document.getElementById('snow');
-  for(let i=0;i<56;i++){
-    const f=document.createElement('i');
-    f.style.left=(Math.random()*100)+'%';
-    f.style.opacity=(.18+Math.random()*.5);
-    f.style.animationDuration=(8+Math.random()*14)+'s';
-    f.style.animationDelay=(-Math.random()*20)+'s';
-    f.style.setProperty('--x',(-45+Math.random()*90)+'px');
-    const size=2+Math.random()*4;
-    f.style.width=size+'px';f.style.height=size+'px';
-    snow.appendChild(f);
-  }
-
-  const sections=[...document.querySelectorAll('[data-title]')];
-  const rail=document.getElementById('rail');
-  sections.forEach((s,i)=>{
-    const b=document.createElement('button');
-    b.setAttribute('aria-label',s.dataset.title);
-    b.title=s.dataset.title;
-    b.onclick=()=>s.scrollIntoView({behavior:'smooth'});
-    rail.appendChild(b);
-  });
-  const dots=[...rail.children];
-
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        e.target.classList.add('in');
-        const idx=sections.indexOf(e.target);
-        dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
-      }
+  <script>
+    const intro = document.getElementById('intro');
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      intro.classList.add('hidden');
+      sessionStorage.setItem('savedPlaceIntroSeen', '1');
     });
-  },{threshold:.5});
-  sections.forEach(s=>obs.observe(s));
+    if (sessionStorage.getItem('savedPlaceIntroSeen') === '1') {
+      intro.classList.add('hidden');
+    }
 
-  document.getElementById('reveal').addEventListener('click',function(){
-    document.getElementById('answer').classList.add('open');
-    this.textContent='There you are.';
-    this.disabled=true;
-  });
-})();
-</script>
+    const revealBtn = document.getElementById('revealBtn');
+    const answer = document.getElementById('answer');
+    revealBtn.addEventListener('click', () => {
+      answer.classList.add('open');
+      revealBtn.textContent = 'There you are.';
+      revealBtn.disabled = true;
+    });
+  </script>
 </body>
 </html>
